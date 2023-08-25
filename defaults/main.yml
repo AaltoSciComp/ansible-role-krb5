@@ -1,0 +1,13 @@
+---
+# defaults file for ansible-role-krb5
+
+# default packages to install
+krb5_packages:
+  - krb5-workstation
+  - cyrus-sasl-gssapi
+
+# when using AD allow weak crypto
+krb5_allow_weak_crypto: true
+
+# add kinit -k to cron
+krb5_renew_cron: true
