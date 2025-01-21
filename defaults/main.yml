@@ -9,5 +9,9 @@ krb5_packages:
 # when using AD allow weak crypto
 krb5_allow_weak_crypto: true
 
-# add kinit -k to cron
-krb5_renew_cron: true
+# add kinit -k to cron/systemd timer
+krb5_renew_cron: false
+krb5_renew_systemd: true
+
+service_file: /etc/systemd/system/krb5renew.service
+timer_file:   /etc/systemd/system/krb5renew.timer

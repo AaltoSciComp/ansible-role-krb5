@@ -23,3 +23,19 @@
       job: "/usr/bin/kinit -k -t /etc/krb5.keytab {{ inventory_hostname|upper }}$ > /dev/null"
     when: krb5_renew_cron
 
+  - name: Create systemd service file for krb5 ticket renew
+    ansible.builtin.template:
+      src: krb5renew.service.j2
+      dest: "{{ service_file }}"
+    notify:
+       - Reload systemd
+    when: krb5_renew_systemd
+
+  - name: Create systemd timer file for krb5 ticket renew
+    ansible.builtin.template:
+       src: krb5renew.timer.j2
+       dest: "{{ timer_file }}"
+    notify:
+        - Reload systemd
+        - Enable and start krb5-ticket-renew.timer
+    when: krb5_renew_systemd

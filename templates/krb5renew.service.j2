@@ -1,0 +1,6 @@
+[Unit]
+Description=Krb5 Ticket Renewal
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/kinit -k -t /etc/krb5.keytab {{ inventory_hostname|upper }}$
